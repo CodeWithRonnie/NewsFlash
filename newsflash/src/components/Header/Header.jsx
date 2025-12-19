@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    if (onSearch) onSearch(query);
+  };
+
   return (
     <header className="header">
       <div className="header-content">
@@ -14,6 +22,8 @@ const Header = () => {
             type="text" 
             placeholder="Search for news..." 
             className="search-input"
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
           <button className="search-button">
             <i className="fas fa-search"></i>
