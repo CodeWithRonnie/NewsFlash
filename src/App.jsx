@@ -1,104 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
 import CategoryTabs from "./components/CategoryTabs/CategoryTabs";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
+import LoadingSkeleton from "./components/LoadingSkeleton/LoadingSkeleton";
 import "./App.css";
 
-// Mock articles (used before real API)
-const mockArticles = [
-  {
-    title: "New Breakthrough in Renewable Energy",
-    description:
-      "Scientists have developed a new solar panel technology that doubles energy efficiency while reducing production costs.",
-    urlToImage: "https://via.placeholder.com/600x400?text=Energy",
-    publishedAt: "December 22, 2025 · 09:30",
-    source: "Tech News",
-    category: "technology",
-  },
-  {
-    title: "Local Team Wins National Championship",
-    description:
-      "The local team secured their first national title in over a decade with a dramatic final goal.",
-    urlToImage: "https://via.placeholder.com/600x400?text=Sports",
-    publishedAt: "December 22, 2025 · 08:10",
-    source: "Sports Daily",
-    category: "sports",
-  },
-  {
-    title: "Global Markets React to Economic Policy Changes",
-    description:
-      "Markets across the world reacted cautiously to newly announced economic stimulus measures.",
-    urlToImage: "https://via.placeholder.com/600x400?text=Business",
-    publishedAt: "December 22, 2025 · 07:45",
-    source: "Financial Times",
-    category: "business",
-  },
-  {
-    title: "Award-Winning Director Announces New Film",
-    description:
-      "The acclaimed filmmaker revealed details about an upcoming project featuring an international cast.",
-    urlToImage: "https://via.placeholder.com/600x400?text=Entertainment",
-    publishedAt: "December 21, 2025 · 19:20",
-    source: "Entertainment Weekly",
-    category: "entertainment",
-  },
-  {
-    title: "Health Experts Highlight Benefits of Balanced Diet",
-    description:
-      "New research confirms that a balanced diet significantly improves long-term health outcomes.",
-    urlToImage: "https://via.placeholder.com/600x400?text=Health",
-    publishedAt: "December 21, 2025 · 18:00",
-    source: "Health Journal",
-    category: "health",
-  },
-];
-
 function App() {
-  const [allArticles] = useState(mockArticles);
-  const [articles, setArticles] = useState(mockArticles);
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  // Handle search from header
+  const API_KEY = "YOUR_NEWSAPI_KEY_HERE";
+
+  // Fetch news from API
+  useEffect(() => {
+    const fetchNews = async () => {
+      setIsLoading(true);
+      try {
+        const categoryParam = activeCategory !== "all" ? `&category=${activeCategory}` : "";
+        const response = await fetch(
+          `https://newsapi.org/v2/top-headlines?country=za${categoryParam}&apiKey=${API_KEY}`
+        );
+        const data = await response.json();
+        setArticles(data.articles);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchNews();
+  }, [activeCategory]);
+
+  // Handle search
   const handleSearch = (query) => {
     setSearchQuery(query);
 
-    const filtered = allArticles.filter((article) =>
+    if (!query) {
+      return; // Do nothing if search is empty
+    }
+
+    const filtered = articles.filter((article) =>
       article.title.toLowerCase().includes(query.toLowerCase())
     );
-
     setArticles(filtered);
   };
 
-  // Handle category click
+  // Handle category selection
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
-
-    if (category === "all") {
-      setArticles(allArticles);
-      return;
-    }
-
-    const filtered = allArticles.filter(
-      (article) => article.category === category
-    );
-
-    setArticles(filtered);
   };
 
   return (
     <div className="app">
+      
       <Header onSearch={handleSearch} />
 
-      <CategoryTabs
-        activeCategory={activeCategory}
-        onSelectCategory={handleCategorySelect}
-      />
+      <main className="app-main">
+        <div className="container">
+          <CategoryTabs activeCategory={activeCategory} onSelectCategory={handleCategorySelect} />
 
-      <Home articles={articles} />
+          {isLoading ? (
+            <LoadingSkeleton count={5} />
+          ) : (
+            <Home articles={articles} />
+          )}
+        </div>
+      </main>
 
       <footer className="app-footer">
-        <p>&copy; {new Date().getFullYear()} NewsFlash. All rights reserved.</p>
+        <div className="container">
+          <p>&copy; {new Date().getFullYear()} NewsFlash. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );
