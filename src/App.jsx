@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import CategoryTabs from "./components/CategoryTabs/CategoryTabs";
-import Home from "./pages/Home/";
+import Home from "./pages/Home";
 import "./App.css";
 
 // Mock articles (used before real API)

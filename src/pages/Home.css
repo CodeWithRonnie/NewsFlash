@@ -109,6 +109,18 @@ main.home {
   margin-top: 0.35rem;
 }
 
+.story-item__image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 0.75rem;
+  float: left;
+}
+.story-item h3, .story-item p {
+  overflow: hidden;
+}
+
+
 @media (max-width: 900px) {
   .home__top-stories,
   .home__grid {

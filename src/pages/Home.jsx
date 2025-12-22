@@ -49,7 +49,10 @@ function Home({ articles }) {
           <p className="section-label">Latest</p>
           <ul>
             {latestStories.map((story, index) => (
-              <li key={index}>
+              <li key={index} className="story-item">
+                {story.urlToImage && (
+                  <img src={story.urlToImage} alt={story.title} className="story-item__image" />
+                )}
                 <h3>
                   <a href={story.url} target="_blank" rel="noreferrer">
                     {story.title}
@@ -57,6 +60,7 @@ function Home({ articles }) {
                 </h3>
                 {story.description && <p>{story.description}</p>}
               </li>
+
             ))}
           </ul>
         </div>
