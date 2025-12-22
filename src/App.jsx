@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import CategoryTabs from "./components/CategoryTabs/CategoryTabs";
 import Home from "./pages/Home";
@@ -7,63 +7,55 @@ import "./App.css";
 
 function App() {
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const API_KEY = "pub_f27a913513b6425ea0316d73249019f9"; 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [category, setCategory] = useState("top");
 
   useEffect(() => {
     const fetchNews = async () => {
-      setIsLoading(true);
+      setLoading(true);
+      setError(null);
 
       try {
-        const categoryParam =
-          activeCategory !== "all" ? `&category=${activeCategory}` : "";
-
-        const response = await fetch(
-          `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en${categoryParam}`
+        const res = await fetch(
+          `https://newsdata.io/api/1/news?apikey=pub_f27a913513b6425ea0316d73249019f9&language=en&category=${category}`
         );
 
-        const data = await response.json();
+        const data = await res.json();
 
-        // newsdata.io uses "results", not "articles"
-        setArticles(data.results || []);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-        setArticles([]);
+        if (!data.results || data.results.length === 0) {
+          setArticles([]);
+          setError("No news available at the moment.");
+        } else {
+          setArticles(data.results);
+        }
+      } catch (err) {
+        setError("Failed to load news. Please try again later.");
+      } finally {
+        setLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     fetchNews();
-  }, [activeCategory]);
+  }, [category]);
 
   return (
-    <div className="app">
+    <>
       <Header />
 
-      <main className="app-main">
-        <div className="container">
-          <CategoryTabs
-            activeCategory={activeCategory}
-            onSelectCategory={setActiveCategory}
-          />
+      <CategoryTabs
+        activeCategory={category}
+        onChangeCategory={setCategory}
+      />
 
-          {isLoading ? (
-            <LoadingSkeleton count={5} />
-          ) : (
-            <Home articles={articles} />
-          )}
-        </div>
-      </main>
+      {error && <div className="error-banner">{error}</div>}
 
-      <footer className="app-footer">
-        <div className="container">
-          <p>&copy; {new Date().getFullYear()} NewsFlash. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
+      {loading ? (
+        <LoadingSkeleton />
+      ) : (
+        <Home articles={articles} />
+      )}
+    </>
   );
 }
 
