@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
 import CategoryTabs from "./components/CategoryTabs/CategoryTabs";
-import Home from "./pages/Home/Home";
-import LoadingSkeleton from "./components/LoadingSkeleton/LoadingSkeleton";
+import Home from "./pages/Home";
+import LoadingSkeleton from "./components/LoadingSkeleton";
 import "./App.css";
 
 function App() {
