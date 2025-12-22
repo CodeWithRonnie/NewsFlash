@@ -1,27 +1,27 @@
-import React from 'react';
-import './CategoryTabs.css';
+import React from "react";
+import "./CategoryTabs.css";
 
 const categories = [
-  'all',
-  'technology',
-  'sports',
-  'entertainment',
-  'health',
-  'science',
-  'business'
+  "top",
+  "technology",
+  "sports",
+  "entertainment",
+  "health",
+  "science",
+  "business"
 ];
 
 const CategoryTabs = ({ activeCategory, onSelectCategory }) => {
   return (
     <div className="category-tabs">
       <div className="tabs-container">
-        {categories.map((category) => (
+        {categories.map((cat) => (
           <button
-            key={category}
-            className={`tab ${activeCategory === category ? 'active' : ''}`}
-            onClick={() => onSelectCategory(category)}
+            key={cat}
+            className={`tab ${activeCategory === cat ? "active" : ""}`}
+            onClick={() => onSelectCategory(cat)}
           >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
         ))}
       </div>

@@ -9,7 +9,9 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState("top");
+  const [category, setCategory] = useState("top"); // Default category
+
+  const API_KEY = "pub_f27a913513b6425ea0316d73249019f9";
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -18,7 +20,7 @@ function App() {
 
       try {
         const res = await fetch(
-          `https://newsdata.io/api/1/news?apikey=pub_f27a913513b6425ea0316d73249019f9&language=en&category=${category}`
+          `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en&category=${category}`
         );
 
         const data = await res.json();
@@ -40,22 +42,22 @@ function App() {
   }, [category]);
 
   return (
-    <>
+    <div className="app">
       <Header />
 
       <CategoryTabs
         activeCategory={category}
-        onChangeCategory={setCategory}
+        onSelectCategory={setCategory} 
       />
 
       {error && <div className="error-banner">{error}</div>}
 
       {loading ? (
-        <LoadingSkeleton />
+        <LoadingSkeleton count={5} />
       ) : (
         <Home articles={articles} />
       )}
-    </>
+    </div>
   );
 }
 
