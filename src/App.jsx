@@ -8,55 +8,47 @@ import "./App.css";
 function App() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const API_KEY = "86608fbfd1554a25b0cea65087fb9348";
+  const API_KEY = "pub_f27a913513b6425ea0316d73249019f9"; 
 
-  // Fetch news from API
- useEffect(() => {
-  const fetchNews = async () => {
-    setIsLoading(true);
-    try {
-      const categoryParam = activeCategory !== "all" ? `&category=${activeCategory}` : "";
-      const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=za${categoryParam}&apiKey=${API_KEY}`
-      );
-      const data = await response.json();
-      setArticles(data.articles);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-    }
-    setIsLoading(false);
-  };
+  useEffect(() => {
+    const fetchNews = async () => {
+      setIsLoading(true);
 
-  fetchNews();
-}, [activeCategory]);
+      try {
+        const categoryParam =
+          activeCategory !== "all" ? `&category=${activeCategory}` : "";
 
- const handleSearch = (query) => {
-    setSearchQuery(query);
+        const response = await fetch(
+          `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en${categoryParam}`
+        );
 
-    if (!query) return;
+        const data = await response.json();
 
-    const filtered = articles.filter(article =>
-      article.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setArticles(filtered);
-  };
+        // newsdata.io uses "results", not "articles"
+        setArticles(data.results || []);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        setArticles([]);
+      }
 
+      setIsLoading(false);
+    };
 
-  const handleCategorySelect = (category) => {
-    setActiveCategory(category);
-  };
+    fetchNews();
+  }, [activeCategory]);
 
   return (
     <div className="app">
-      
-      <Header onSearch={handleSearch} />
+      <Header />
 
       <main className="app-main">
         <div className="container">
-          <CategoryTabs activeCategory={activeCategory} onSelectCategory={handleCategorySelect} />
+          <CategoryTabs
+            activeCategory={activeCategory}
+            onSelectCategory={setActiveCategory}
+          />
 
           {isLoading ? (
             <LoadingSkeleton count={5} />
