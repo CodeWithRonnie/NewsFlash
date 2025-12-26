@@ -2,7 +2,7 @@ import React from "react";
 import "./CategoryTabs.css";
 
 const categories = [
-  "top",
+  "all",
   "technology",
   "sports",
   "entertainment",

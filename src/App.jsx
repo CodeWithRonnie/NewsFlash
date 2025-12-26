@@ -10,15 +10,17 @@ function App() {
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState("top");
+  const [category, setCategory] = useState("top"); // Default category
   const [searchTerm, setSearchTerm] = useState("");
 
   const API_KEY = "pub_f27a913513b6425ea0316d73249019f9";
 
+  // Fetch news on category change
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
       setError(null);
+
       try {
         const res = await fetch(
           `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en&category=${category}`
@@ -31,7 +33,7 @@ function App() {
           setError("No news available at the moment.");
         } else {
           setArticles(data.results);
-          setFilteredArticles(data.results);
+          setFilteredArticles(data.results); // Initially, show all articles in this category
         }
       } catch {
         setError("Failed to load news. Please try again later.");
@@ -43,12 +45,8 @@ function App() {
     fetchNews();
   }, [category]);
 
-  // 🔍 Filter articles as user types
+  // Filter articles by search term within the selected category
   useEffect(() => {
-    if (!searchTerm) {
-      setFilteredArticles(articles);
-      return;
-    }
     const filtered = articles.filter((article) =>
       article.title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -59,10 +57,7 @@ function App() {
     <div className="app">
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      <CategoryTabs
-        activeCategory={category}
-        onSelectCategory={setCategory}
-      />
+      <CategoryTabs activeCategory={category} onSelectCategory={setCategory} />
 
       {error && <div className="error-banner">{error}</div>}
 
