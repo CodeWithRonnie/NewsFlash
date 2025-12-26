@@ -20,14 +20,18 @@
 .logo h1 {
   font-size: 1.8rem;
   margin: 0;
+  font-size: 4rem;
   font-weight: 700;
+  font-family: Bangers, Poppins, sans-serif;
 }
 
 .tagline {
-  color: rgb(253, 13, 13);
+  color: red;
   font-size: 0.9rem;
   margin: 0.2rem 0 0 0;
-  font-weight: 400;
+  font-weight: 800;
+  font-family: Bangers;
+  text-decoration: underline;
 }
 
 .search-bar {
