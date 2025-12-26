@@ -7,9 +7,11 @@ import "./App.css";
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState("top"); // Default category
+  const [category, setCategory] = useState("top");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const API_KEY = "pub_f27a913513b6425ea0316d73249019f9";
 
@@ -17,21 +19,21 @@ function App() {
     const fetchNews = async () => {
       setLoading(true);
       setError(null);
-
       try {
         const res = await fetch(
           `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en&category=${category}`
         );
-
         const data = await res.json();
 
         if (!data.results || data.results.length === 0) {
           setArticles([]);
+          setFilteredArticles([]);
           setError("No news available at the moment.");
         } else {
           setArticles(data.results);
+          setFilteredArticles(data.results);
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load news. Please try again later.");
       } finally {
         setLoading(false);
@@ -41,13 +43,25 @@ function App() {
     fetchNews();
   }, [category]);
 
+  // 🔍 Filter articles as user types
+  useEffect(() => {
+    if (!searchTerm) {
+      setFilteredArticles(articles);
+      return;
+    }
+    const filtered = articles.filter((article) =>
+      article.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredArticles(filtered);
+  }, [searchTerm, articles]);
+
   return (
     <div className="app">
-      <Header />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <CategoryTabs
         activeCategory={category}
-        onSelectCategory={setCategory} 
+        onSelectCategory={setCategory}
       />
 
       {error && <div className="error-banner">{error}</div>}
@@ -55,7 +69,7 @@ function App() {
       {loading ? (
         <LoadingSkeleton count={5} />
       ) : (
-        <Home articles={articles} />
+        <Home articles={filteredArticles} />
       )}
     </div>
   );

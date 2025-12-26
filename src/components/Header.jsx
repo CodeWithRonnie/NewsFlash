@@ -1,6 +1,6 @@
 import "./Header.css";
 
-function Header() {
+function Header({ searchTerm, setSearchTerm }) {
   return (
     <header className="header">
       <div className="header__brand">
@@ -9,9 +9,11 @@ function Header() {
       </div>
 
       <input
-        type="text"
+        type="search"
         placeholder="Search news..."
-        className="header__search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
       />
     </header>
   );
