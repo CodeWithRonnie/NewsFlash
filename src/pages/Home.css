@@ -180,3 +180,12 @@ main.home {
 .mobile-trending_list li + li {
   margin-top: 0.5rem;
 }
+
+
+.home-footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+}

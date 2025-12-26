@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CategoryTabs.css";
 
 const categories = [
-  "top",
+  "all",
   "technology",
   "sports",
   "entertainment",
@@ -14,7 +14,6 @@ const categories = [
 const CategoryTabs = ({ activeCategory, onSelectCategory }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Update isMobile when window resizes
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -22,7 +21,7 @@ const CategoryTabs = ({ activeCategory, onSelectCategory }) => {
   }, []);
 
   if (isMobile) {
-    // MOBILE: use dropdown
+
     return (
       <div className="category-dropdown">
         <select
@@ -39,7 +38,6 @@ const CategoryTabs = ({ activeCategory, onSelectCategory }) => {
     );
   }
 
-  // DESKTOP: show horizontal tabs
   return (
     <div className="category-tabs">
       {categories.map((category) => (
