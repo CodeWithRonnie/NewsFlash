@@ -1,5 +1,5 @@
 .header {
-  background-color: #fff;
+  background-color: #0e0d0d;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
   position: sticky;
@@ -14,17 +14,17 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  background: black
 }
 
 .logo h1 {
-  color: #1a73e8;
   font-size: 1.8rem;
   margin: 0;
   font-weight: 700;
 }
 
 .tagline {
-  color: #5f6368;
+  color: rgb(253, 13, 13);
   font-size: 0.9rem;
   margin: 0.2rem 0 0 0;
   font-weight: 400;
@@ -35,7 +35,7 @@
   align-items: center;
   background: #f1f3f4;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
+  padding: 8 1rem;
   width: 40%;
   max-width: 500px;
   transition: all 0.3s ease;

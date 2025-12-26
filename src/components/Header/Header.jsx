@@ -3,10 +3,10 @@ import './Header.css';
 
 const Header = ({ searchTerm, setSearchTerm }) => {
   return (
-    <header className="header">
+    <header className="header" >
       <div className="header-content">
         <div className="logo">
-          <h1>NewsFlash</h1>
+          <h1><span style={{color: 'red'}}>News</span><span style={{color: 'white'}}>Flash</span></h1>
           <p className="tagline">Your daily dose of news</p>
         </div>
         <div className="search-bar">
