@@ -1,16 +1,23 @@
-# React + Vite
+# NewsFlash
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **NewsFlash**, a modern, responsive news web application that keeps you updated with the latest headlines from around the world. Whether you want to check technology updates, sports highlights, or trending stories, NewsFlash brings them all to your fingertips.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Top Stories:** Highlights the biggest news of the day with an image and summary.
+- **Latest News:** Shows the most recent articles across various categories.
+- **Trending Sidebar:** Displays trending news on desktop and mobile-friendly dropdown for smaller screens.
+- **Category Tabs:** Browse news by categories like Technology, Sports, Entertainment, Health, Science, and Business.
+- **Search Functionality:** Filter articles in real-time based on keywords and categories.
+- **Responsive Design:** Works perfectly on desktops, tablets, and mobile devices (iPhone-friendly layout).
+- **Fallback Images:** Handles broken images gracefully with placeholders.
+- **Error Handling:** Displays a friendly message if the news API fails or no articles are found.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React.js (functional components, hooks)
+- **Styling:** CSS Grid, Flexbox, and responsive design principles
+- **API:** [Newsdata.io](https://newsdata.io) for fetching news articles
+- **Other Tools:** `fetch` for API requests, lazy loading images for better performance

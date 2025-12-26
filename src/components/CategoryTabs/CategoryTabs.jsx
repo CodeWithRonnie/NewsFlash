@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CategoryTabs.css";
 
 const categories = [
-  "all",
+  "top",
   "technology",
   "sports",
   "entertainment",
