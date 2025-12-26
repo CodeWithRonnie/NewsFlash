@@ -28,7 +28,16 @@ function Home({ articles }) {
             )}
 
             <p className="section-label">Top Story</p>
-            <h2>{leadStory.title}</h2>
+            <h2>
+              <a 
+                href={leadStory.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="story-card_title"
+              >
+                {leadStory.title}
+              </a>
+            </h2>
 
             <p className="lead-story_meta">
               {leadStory.creator?.[0] || "NewsFlash"} ·{" "}
@@ -57,7 +66,16 @@ function Home({ articles }) {
                   />
                 )}
 
-                <h3>{article.title}</h3>
+                <h3>
+                  <a 
+                    href={article.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="story-card_title"
+                  >
+                    {article.title}
+                  </a>
+                </h3>
                 <p>{article.description || "No summary available."}</p>
               </article>
             ))}
@@ -68,7 +86,16 @@ function Home({ articles }) {
               <h4>Trending</h4>
               <ol>
                 {articles.slice(6, 11).map((article, index) => (
-                  <li key={index}>{article.title}</li>
+                  <li key={index}>
+                    <a 
+                      href={article.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="story-card_title"
+                    >
+                      {article.title}
+                    </a>
+                  </li>
                 ))}
               </ol>
             </div>
@@ -76,6 +103,7 @@ function Home({ articles }) {
         </section>
       </main>
 
+      
       <footer className="home-footer">
         <div className="footer-container">
           <p>&copy; {new Date().getFullYear()} NewsFlash. All rights reserved.</p>
