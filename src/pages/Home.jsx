@@ -8,20 +8,20 @@ function Home({ articles }) {
   const leadStory = articles[0];
 
   const handleImageError = (e) => {
-    e.target.src = "/fallback-news.jpg"; // local image in /public
+    e.target.src = "/fallback-news.jpg"; 
   };
 
   return (
     <main className="home">
-      {/* TOP STORY */}
-      <section className="home__top-stories">
+      
+      <section className="home_top-stories">
         <article className="lead-story">
           {leadStory.image_url && (
             <img
               src={leadStory.image_url}
               alt={leadStory.title}
               onError={handleImageError}
-              className="lead-story__image"
+              className="lead-story_image"
               loading="lazy"
             />
           )}
@@ -29,20 +29,19 @@ function Home({ articles }) {
           <p className="section-label">Top Story</p>
           <h2>{leadStory.title}</h2>
 
-          <p className="lead-story__meta">
+          <p className="lead-story_meta">
             {leadStory.creator?.[0] || "NewsFlash"} ·{" "}
             {leadStory.pubDate || "Today"}
           </p>
 
-          <p className="lead-story__summary">
+          <p className="lead-story_summary">
             {leadStory.description || "No description available."}
           </p>
         </article>
       </section>
 
-      {/* MAIN GRID */}
-      <section className="home__grid">
-        <div className="home__main-column">
+      <section className="home_grid">
+        <div className="home_main-column">
           <p className="section-label">Latest News</p>
 
           {articles.slice(1, 6).map((article, index) => (
@@ -52,7 +51,7 @@ function Home({ articles }) {
                   src={article.image_url}
                   alt={article.title}
                   onError={handleImageError}
-                  className="story-card__image"
+                  className="story-card_image"
                   loading="lazy"
                 />
               )}
@@ -63,8 +62,7 @@ function Home({ articles }) {
           ))}
         </div>
 
-        {/* SIDEBAR */}
-        <aside className="home__sidebar">
+        <aside className="home_sidebar">
           <div className="sidebar-block">
             <h4>Trending</h4>
             <ol>

@@ -21,72 +21,8 @@
   color: white
 }
 
-.site-header__brand-main {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
 
-.site-header__brand-tagline {
-  display: block;
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 0.15rem;
-}
-
-.site-header__actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.site-header__subscribe {
-  background: #c8102e;
-  color: #fff;
-  border: none;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-}
-
-.site-header__sign-in {
-  background: transparent;
-  border: 1px solid #ccc;
-  padding: 0.35rem 0.8rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-.site-header__nav {
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 2px solid #c8102e;
-  background: #fafafa;
-}
-
-.site-header__nav > ul {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.site-header__nav li {
-  cursor: pointer;
-}
-
-.site-header__nav li.is-active {
-  font-weight: 700;
-  border-bottom: 2px solid #c8102e;
-}
-
-.site-header__search {
+.site-header_search {
   max-width: 1200px;
   margin: 0 auto 0.5rem;
   padding: 0 1rem;
@@ -94,7 +30,7 @@
   justify-content: flex-end;
 }
 
-.site-header__search input {
+.site-header_search input {
   max-width: 260px;
   width: 100%;
   padding: 0.35rem 0.6rem;

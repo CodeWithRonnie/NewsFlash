@@ -10,12 +10,11 @@ function App() {
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState("top"); // Default category
+  const [category, setCategory] = useState("top"); 
   const [searchTerm, setSearchTerm] = useState("");
 
   const API_KEY = "pub_f27a913513b6425ea0316d73249019f9";
 
-  // Fetch news on category change
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
@@ -33,7 +32,7 @@ function App() {
           setError("No news available at the moment.");
         } else {
           setArticles(data.results);
-          setFilteredArticles(data.results); // Initially, show all articles in this category
+          setFilteredArticles(data.results); 
         }
       } catch {
         setError("Failed to load news. Please try again later.");
@@ -45,7 +44,7 @@ function App() {
     fetchNews();
   }, [category]);
 
-  // Filter articles by search term within the selected category
+  
   useEffect(() => {
     const filtered = articles.filter((article) =>
       article.title?.toLowerCase().includes(searchTerm.toLowerCase())

@@ -3,7 +3,7 @@ import "./Header.css";
 function Header({ searchTerm, setSearchTerm }) {
   return (
     <header className="header">
-      <div className="header__brand">
+      <div className="header_brand">
         <span className="brand-news">News</span>
         <span className="brand-flash">Flash</span>
       </div>
